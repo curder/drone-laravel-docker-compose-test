@@ -1,6 +1,6 @@
 pipeline:
   - name: build
-    image: node:10.6
+    image: node:10.16
     commands:
       - yarn install
       - yarn prod
