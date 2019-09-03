@@ -1,7 +1,14 @@
-pipeline:
-  - name: build
+kind: pipeline
+name: default
+
+steps:
+  - name: yarn
     image: node:10.16
     commands:
+      - node -v
+      - npm -v
+      - yarn config set cache-folder .yarn-cache
+      - yarn --version
       - yarn install
       - yarn prod
 
