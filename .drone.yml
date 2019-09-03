@@ -31,7 +31,7 @@ steps:
     settings:
       hosts:
         - dev.webfsd.com
-      source: ./
+      source: ./*
       include:
         - "**.*"
       exclude:
