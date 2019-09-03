@@ -1,0 +1,33 @@
+pipeline:
+  - name: build
+    image: node:10.6
+    commands:
+      - yarn install
+      - yarn prod
+
+  - name: composer
+    image: curder/laravel-docker
+    commands:
+      - php -v
+      - composer -V
+      - composer install --prefer-dist -vvv
+
+  - name: rsync
+    image: drillster/drone-rsync
+    environment:
+      RSYNC_KEY:
+        from_secret: rsync_key
+      RSYNC_USER:
+        from_secret: rsync_user
+      PLUGIN_TARGET:
+        from_secret: rsync_target
+    settings:
+      hosts:
+        - dev.webfsd.com
+      source: .
+      include:
+        - "**.*"
+      exclude:
+        - ".env"
+      script:
+        - cd ${PLUGIN_TARGET} && ls -la
