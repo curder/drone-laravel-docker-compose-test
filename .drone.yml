@@ -35,6 +35,6 @@ steps:
       include:
         - "**.*"
       exclude:
-        - ".env"
+        - "**.*"
       script:
         - cd ${PLUGIN_TARGET} && ls -la
